@@ -14,8 +14,7 @@ public class Yatzy {
 
     public static int chance(int d1, int d2, int d3, int d4, int d5)
     {
-        List<Integer> integers = Arrays.asList(d1, d2, d3, d4, d5);
-        return integers.stream().mapToInt(Integer::intValue).sum();
+    	return IntStream.of(d1, d2, d3, d4, d5).sum();
     }
 
     public static int yatzy(int... dice)
@@ -30,18 +29,15 @@ public class Yatzy {
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {
-        List<Integer> integers = Arrays.asList(d1, d2, d3, d4, d5);
-        return integers.stream().mapToInt(Integer::intValue).filter(x -> x == 1).sum();
+        return IntStream.of(d1, d2, d3, d4, d5).filter(x -> x == 1).sum();
     }
 
     public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        List<Integer> integers = Arrays.asList(d1, d2, d3, d4, d5);
-        return integers.stream().mapToInt(Integer::intValue).filter(x -> x == 2).sum();
+        return IntStream.of(d1, d2, d3, d4, d5).filter(x -> x == 2).sum();
     }
 
     public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        List<Integer> integers = Arrays.asList(d1, d2, d3, d4, d5);
-        return integers.stream().mapToInt(Integer::intValue).filter(x -> x == 3).sum();
+        return IntStream.of(d1, d2, d3, d4, d5).filter(x -> x == 3).sum();
     }
 
     protected int[] dice;
@@ -66,15 +62,10 @@ public class Yatzy {
     }
 
     public int sixes()
-    {    	return Arrays.stream(dice).filter(x -> x == 6).sum();
+    {    	
+    	return Arrays.stream(dice).filter(x -> x == 6).sum();
     }
 
-    public static List<Integer> findPairsWithStreamApi(int[] input) {
-        final List<Integer> allExistingPairs = new ArrayList<>();
-
-        return allExistingPairs;
-    }
-    
 	public static List<Integer> findPairs(List<Integer> integers, int occurance) {
 		final List<Integer> allExistingPairs = new ArrayList<>();
 		integers.stream().filter(i -> Collections.frequency(integers, i) > occurance)
@@ -82,7 +73,7 @@ public class Yatzy {
 				.forEach(allExistingPairs::add);
 		return allExistingPairs;
 	}
-
+	
 	public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
 		List<Integer> integers = Arrays.asList(d1, d2, d3, d4, d5);
 		return findPairs(integers, 1).stream().max(Comparator.comparing(Integer::valueOf)).get() * 2;
